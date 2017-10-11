@@ -22,6 +22,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{lscape}
+\usepackage[T1]{fontenc}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -159,6 +160,13 @@ usecases
 \subsubsection{Query Grammar}
 \label{Query_Grammar}
 
+\begin{itemize}  
+\item gd = group|dataset
+\item da = dataset|attribute
+\item gd = (expression)
+\item expression = expression | expression \& expression
+\item expression = da < const | da <= const | da > const | da <= const | da LIKE const | gda
+\end{itemize}
 
 % For tables use
 \begin{table}
@@ -172,8 +180,8 @@ usecases
 	 \textbf{Query}                                  &       \textbf{Description} \\ \hline
 	
 	 analysis=(description LIKE whisker)  &  selects all datasets description from an analysis group which contains a whisker string  \\ \hline
-	 processing=(electrode\_idx>30)        &  selects all electrode\_idx datasets from a processing group which value > 30   \\ \hline
-	 epochs=(start\_time>200 \& stop\_time<400 \&\#124; stop\_time>1600)  &  selects all epochs which start\_time > 200 and stop\_time < 400 or stop\_time > 1600 \\ \hline
+	 processing=(electrode\_idx > 30)        &  selects all electrode\_idx datasets from a processing group which value > 30   \\ \hline
+	 epochs=(start\_time > 200 \& stop\_time<400 \&\#124; stop\_time > 1600)  &  selects all epochs which start\_time > 200 and stop\_time < 400 or stop\_time > 1600 \\ \hline
 	 epochs=(start\_time)                     &  selects all epochs with a start\_time dataset         \\ \hline
 	 data=(unit LIKE unkno)  &  selects all datasets data with attributes containing a substring unkno \\ \hline
 	 pole\_in/data=(unit LIKE unkno)  &  takes into account only data within a pole\_in group \\ \hline
@@ -186,6 +194,16 @@ usecases
 
 
 \subsubsection{Operators}
+
+
+\begin{itemize}
+ \item and \&
+ \item or  |
+ \item equal ==
+ \item assignment =
+ \item brackets ()
+ \item substrings in strings LIKE
+\end{itemize}
 
 
 \subsection{Python Gateway}
