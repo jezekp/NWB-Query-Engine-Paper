@@ -11,8 +11,8 @@
 %%% In http://www.ctan.org/ you can find the packages and how to install them, if necessary. %%%
 %%%  NB logo1.jpg is required in the path in order to correctly compile front page header %%%
 
-%\documentclass[utf8]{frontiersSCNS} % for Science, Engineering and Humanities and Social Sciences articles
-\documentclass[utf8]{frontiersHLTH} % for Health articles
+\documentclass[utf8]{frontiersSCNS} % for Science, Engineering and Humanities and Social Sciences articles
+%\documentclass[utf8]{frontiersHLTH} % for Health articles
 %\documentclass[utf8]{frontiersFPHY} % for Physics and Applied Mathematics and Statistics articles
 
 %\setcitestyle{square} % for Physics and Applied Mathematics and Statistics articles
@@ -46,7 +46,7 @@ $^{2}$Laboratory X, Institute X, Department X, Organization X, City X , State XX
 \onecolumn
 \firstpage{1}
 
-\title[Running Title]{NWB Query Engine: Efficient way to query neurophysiological data stored in Neurodata Without Borders format} 
+\title[NWB Query Engine]{NWB Query Engine: Efficient way to query neurophysiological data stored in Neurodata Without Borders format} 
 
 \author[\firstAuthorLast ]{\Authors} %This field will be automatically populated
 \address{} %This field will be automatically populated
@@ -74,11 +74,15 @@ As a primary goal, the abstract should render the general significance and conce
 
 \section{Introduction}
 
-Data coming from neurophysiological experiments are heterogeneous and organized in various data formats. A data format is usually given by hardware and software equipment.  With increasing number of experiments the problem of non-standarised datasets stored in non-standarised formats makes it difficult for effective management and sharing. Researchers pointing out that data are even more important then papers describing results observed from the data. It is because if results are described in scientific papers without an access to the original datasets their validation or refinement over time is practically impossible. As a solution several attempts to provide a standardized way for storing data have appeared. These solutions are based on different approaches from free-form data storages based on simple data model providing only basic data structure \citep{10.3389/fninf.2011.00016} to rigid data formats (TODO example) requiring strictly defined set of attributes, or data formats based on Semantic Web technologies \citep{10.3389/conf.fninf.2014.18.00044, DouFRFMT07} that aims to provide a machine readable data via the Internet. 
+Data coming from neurophysiological experiments are heterogeneous and organized in various data formats. A data format is usually given by hardware and software equipment defined by the product vendor. This format cannot be easily changed or reused in different devices. Nowadays with increasing computational performance and disk storages capacity researchers are more and more motivated to preserve not only experimental results but also original data used for perfomed analysis. A new modern concept calls such data as "Big Data" defined as  three Vs. (1) Volume defining big data as data from variety of sources , (2) Velocity defining big data as data coming from sensors by unprecedented speed, and	(3) Variety saying that data are coming in all types of formats. Moreover neurophysiological data go even more behind this concept. Their are multimodal, dynamic because single experiment can involve several signal acquisition modalities.  With increasing number of experiments the problem of non-standarised datasets stored in non-standarised formats makes it difficult for effective management and sharing. Researchers point out that data are even more important then papers describing results observed from the data. It is because if results are described in scientific papers without an access to the original datasets their validation or refinement over time is practically impossible. As a solution several attempts to provide a standardized way for storing data have appeared. These solutions are based on different approaches from free-form data storages based on simple data model providing only basic data structure \citep{10.3389/fninf.2011.00016} to rigid data formats often based on fixed schema technologies implemented in relational databases (e. g. SciDB \citep{Brown:2010:OSL:1807167.1807271}) requiring strictly defined set of attributes, or data formats based on Semantic Web technologies that aims to provide a machine readable data via the Internet. 
 
-Lot of approaches are in very preliminary implementation or do not provide satisfactory application interface. On the other hand lot of them are focused only on a specific purposes of a single laboratory. The most current and promising approach todays seems to be a Neurodata Without Borders (NWB) format its structure is based on conformity of various US universities and laboratories.
+Data formats based on a semantic web approach contains e.g.  NEMO \citep{DouFRFMT07} that describes classes of event-related brain potentials (ERP) and their properties. OBI \citep{citeulike:7291351} that is about scientific investigations, so OBI contains both general terms  and specific terms. Every term has a unique identifier, standard metadata, and logical definitions that connect it to other terms in OBI or OEN  \citep{10.3389/conf.fninf.2014.18.00044} that aims to cover devices and methods, and a  neurophysiological concepts derived from various data sources.
 
-Once the first pilot version of this format and its write API has been released \citep{teeters-neuron} questions on how to effectively query stored data raised. As a solution the NWB Query engine that aims to provide an easy-to-use way to query dataset stored in the NWB format is presented.
+Lot of approaches are in preliminary implementation or do not provide satisfactory application interface. On the other hand lot of them are focused only on a specific purposes of a single laboratory. The most current and promising approach todays seems to be a Neurodata Without Borders (NWB) format its structure is based on conformity of various US universities and laboratories.
+
+Once the first pilot version of this format and its write API has been released \citep{teeters-neuron} questions on how to effectively query stored data raised. While relational databases based solutions are queried fairly easy by SQL and  data storages based on Semantic Web technologies are searchable solely by SPARQL \citep{prudhommeaux2008sparql} a satisfactory query engine for the NWB format does not exist.
+
+As a solution the NWB Query engine that aims to provide an easy-to-use way to query dataset stored in the NWB format is presented.
 
 The paper is organized as follows: Section \ref{materials_and_methods} describes state of the art in developing of data formats for neurophysiological experiments, existing frameworks for querying stored data and defines use-cases and specifications to the query engine. Then Section \ref{results} deals with the developed architectonic concept, describes implementation detail and a user perspective of the query engine. Last Section before Conclusion, Section \ref{Discussion} compares limitations of existing systems with the current one and points ideas for improvements.
 
