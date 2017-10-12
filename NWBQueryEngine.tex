@@ -140,7 +140,53 @@ Maybe something about HDF5 API should be included as well.
 
 \subsection{Query Engine High Level Specification}
 \label{Query_engine_specification}
-usecases
+
+\subsubsection{High Level Specification}
+
+A specification of the NWB query engine should ensure at least following functionality:
+\begin{enumerate}
+ \item To provide a simple query language that can specifying particular subsets of data for analysis based on searches of metadata and specific sets of times defined by those metadata or by intermediate analyses.
+ \item To provide a read API for the NWB format data files that can quickly and easily be used to load up a set of requested data types at times constrained by the user’s query.
+ \item To allow for the construction of query pipelines.
+\end{enumerate}
+
+
+
+\subsubsection{Data Types}
+
+The data consist of recordings of experimental parameters, neuronal activity and behavioral measures from animals and humans. They consists largely of time series of measurements at varying sampling rates and associated metadata describing task parameters, anatomical locations of electrodes, etc. Moreover, they are organized hierarchically by subject / animal with multiple days of data per animal.
+
+\subsubsection{Typical Data Analysis Steps}
+
+TODO - include also metadata stored in different systems? 
+
+Typical experiment contains several steps that are needed to set up an environment and to arrange recordings. These metadata are stored and must be available for searching. 
+
+Typical animal recording contains following metadata:
+
+\begin{enumerate}
+ \item Epochs information - Names with start and end times for each period is stored together with information such as exposure number. 
+ \item Electrode location - Anatomical location for each electrode
+ \item Cell properties information - clustered cells information
+ \item Local field from potentials from each electrode - Filtered in different ranges (LFP, Ripple, Theta, etc.)
+ \item LFP Events - Start and end time
+ \item Animal position
+ \item Times of task events
+\end{enumerate}
+
+For human recording following metadata are typically stored:
+
+\begin{enumerate}
+ \item Epochs information - Names with start and end times for each period is stored together with information such as exposure number
+ \item Electrode location - Anatomical location for each electrode in native and standard atlas space.
+ \item Potentials from each electrode - Including multiple different ranges (LFP, deltha, theta, alpha, gamma etc.)
+ \item Start end stop time of specific detected event
+ \item Signal artifacts - Movement, bad electrode etc.
+ \item Stimulus information - time of stimulus onset, stimulus name, stimulus type and stimulus metadata
+\end{enumerate}
+
+
+
 
 \subsection{Scope and Requirements}
 \label{Scope_and_requirements}
