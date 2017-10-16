@@ -128,6 +128,19 @@ The paper is organized as follows: Section \ref{materials_and_methods} describes
 
 \subsection{Neurodata Without Borders Format}
 
+The aim of the Neurodata Without Borders project is to design a data format for storing a variety of neurophysiology data, including from intracellular and extracellular electrophysiology experiments, optical physiology experiments, as well as tracking and stimulus data.
+
+From the implementation point of view the HDF5 data format is used. HDF5 formats provide following primitives to represent data:
+
+\begin{itemize}
+ \item Group - It is an element for grouping datasets into logical group. Group can be understood as a directory on a file system.
+ \item Dataset - Is a representation of stored raw data. It is implmenented as a multidimensional array 
+ \item Attribute - Attribute is a key-value representation that can suplement a group or a dataset by metadata
+\end{itemize}
+
+
+The first version 1.0 is fully implemented and tested. Vesion 2.0 that has been developing removes some drawback of the previous one and adds a high-level API definition. The NWB Query Engine is supposed to be fully compatible and tested on the version 1.0. Moreower its internal implementation is designed to be compatible also with the version 2.0. Availability of the experiments stored in version 2.0 is only limiting factor to fully test it also on this version.
+
 Something about NWB specification, specification language, implementation in HDF5, NWB 1.0 vs. 2.0
 
 \subsection{DataJoint}
@@ -285,11 +298,11 @@ For human recording following metadata are typically stored:
 	
 	 analysis=(description LIKE whisker)  &  selects all datasets description from an analysis group which contains a whisker string  \\ \hline
 	 processing=(electrode\_idx > 30)        &  selects all electrode\_idx datasets from a processing group which value > 30   \\ \hline
-	 epochs=(start\_time > 200 \& stop\_time<400 \&\#124; stop\_time > 1600)  &  selects all epochs which start\_time > 200 and stop\_time < 400 or stop\_time > 1600 \\ \hline
+	 epochs=(start\_time > 200 \& stop\_time<400 \& stop\_time > 1600)  &  selects all epochs which start\_time > 200 and stop\_time < 400 or stop\_time > 1600 \\ \hline
 	 epochs=(start\_time)                     &  selects all epochs with a start\_time dataset         \\ \hline
 	 data=(unit LIKE unkno)  &  selects all datasets data with attributes containing a substring unkno \\ \hline
 	 pole\_in/data=(unit LIKE unkno)  &  takes into account only data within a pole\_in group \\ \hline
-	 analysis=(description LIKE whisker) \&\#124; epochs=(start\_time)   &  A combination of previous queries \\ \hline
+	 analysis=(description LIKE whisker) \& epochs=(start\_time)   &  A combination of previous queries \\ \hline
 
 \end{tabular}
 
