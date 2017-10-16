@@ -130,13 +130,17 @@ The paper is organized as follows: Section \ref{materials_and_methods} describes
 
 The aim of the Neurodata Without Borders project is to design a data format for storing a variety of neurophysiology data, including from intracellular and extracellular electrophysiology experiments, optical physiology experiments, as well as tracking and stimulus data.
 
-From the implementation point of view the HDF5 data format is used. HDF5 formats provide following primitives to represent data:
+From the implementation point of view the HDF5 data format is used. This format is suitable because its easy-to-use, or does not require any specific software equipment installed on a user computer. It can be easily transfered between different computers and its internal structure provides sufficient means for storing both raw signal data and their metadata. The easy usability motivates several neuroscience initiatives and groups to implement their solution in HDF5 format as well. The NIX\footnote{https://github.com/G-Node/nix} defines a structure for storing raw data as a groups and datasets withing one HDF5 file together with metadata defined in their odML \citep{10.3389/fninf.2011.00016} format. Next,  Klustakwik\footnote{http://klusta.readthedocs.io/en/latest/} its an implementation of a HDF5 format for storage of spike sorting data. Orca\footnote{http://crcns.org/files/data/nwb/h1/NWBh1\_09\_Keith\_Godfrey.pdf} is a HDF5 format for storing electrophysiology and optophysiology data. BRAINformat \citep{10.3389/fninf.2016.00048} is a general framework for management of scientific data formats by their own concept of Managed Object representing individual semantic components of data formats.  HDF5 formats provide following primitives to represent data:
 
 \begin{itemize}
  \item Group - It is an element for grouping datasets into logical group. Group can be understood as a directory on a file system.
- \item Dataset - Is a representation of stored raw data. It is implmenented as a multidimensional array 
- \item Attribute - Attribute is a key-value representation that can suplement a group or a dataset by metadata
+ \item Dataset - Is a representation of stored raw data. It is implemented as a multidimensional array 
+ \item Attribute - Attribute is a key-value information used to supplement a group or a dataset by metadata
 \end{itemize}
+
+
+
+
 
 
 The first version 1.0 is fully implemented and tested. Vesion 2.0 that has been developing removes some drawback of the previous one and adds a high-level API definition. The NWB Query Engine is supposed to be fully compatible and tested on the version 1.0. Moreower its internal implementation is designed to be compatible also with the version 2.0. Availability of the experiments stored in version 2.0 is only limiting factor to fully test it also on this version.
@@ -162,7 +166,6 @@ A specification of the NWB query engine should ensure at least following functio
  \item To provide a read API for the NWB format data files that can quickly and easily be used to load up a set of requested data types at times constrained by the user’s query.
  \item To allow for the construction of query pipelines.
 \end{enumerate}
-
 
 
 \subsubsection{Data Types}
