@@ -128,12 +128,9 @@ The paper is organized as follows: Section \ref{materials_and_methods} describes
 
 \subsection{DataJoint}
 
-DataJoint \citep{Yatsenko031658} is a tool that aim is to hide a complexity of relational schema and provide user a use-friendly Python or Matlab API for easy integration of the data storage with the clients system. Technically it can be understand as an Object-Relational Mapping \citep{Keith2010} for Matlab or Python based systems. The implementation maps database tables to Python classes allowing fetching data stored in the database to the instances of classes. DataJoint also defines basic operations on tuples such as conjunction \emph{A \& B} denoting relations comprising all tuples from A that match any tuple in B, disjunction \emph{A * B} denoting relations comprising tuples in A and in B, inverse \emph{A - B} denoting all tuples from A that do not match any tuple in B, projection etc \emph{A.pro(B)} that modifies heading of A by B.
+DataJoint \citep{Yatsenko031658} is a tool aims to hide a complexity of relational schema and provide user a use-friendly Python or Matlab API for easy integration of the data storage with the clients system. Technically it can be understand as an Object-Relational Mapping \citep{Keith2010} for Matlab or Python based systems. The implementation maps database tables to Python classes allowing fetching data stored in the database to the instances of classes. DataJoint also defines basic operations on tuples such as conjunction \emph{A \& B} denoting relations comprising all tuples from A that match any tuple in B, disjunction \emph{A * B} denoting relations comprising tuples in A and in B, inverse \emph{A - B} denoting all tuples from A that do not match any tuple in B, projection etc \emph{A.pro(B)} that modifies heading of A by B.
 
 \subsection{HDF5}
-
-
-
 
 HDF5 format \citep{Koziol2011} provides following primitives to represent data:
 
@@ -147,7 +144,15 @@ Moreover HDF5 provides nearly unlimited flexibility of datatypes. Next addresses
 
 The other HDF5 applications \citep{Folk:2011:OHT:1966895.1966900} provide a High level interface, DBMS Back-End, OPeNDAP support etc.
 
-Maybe something about HDF5 API should be included as well.
+The HDF5 format is interesting in neuroscience community because provide multidimensional data storage and retrieval and also provides a sufficient way for storing experimental metadata. However one drawback is that it does not support searching of data.
+
+
+
+As a solution several attempts to provide a searching capability over HDF5 files has been proposed. HDF5-FastQuery \citep{1644309}, \citep{6114446} provides an approach for indexing on multi-dimensional data. The proposed API simplifies the execution of queries on HDF5 files for general scientific applications and data analysis.
+
+Another approach \citep{6546110} creates a light-weight data management layer that allows running queries expressed in the SQL syntax on the metadata storage. The metadata are generated from HDF5 files in runtime.
+
+Maybe something about HDF5 API, data, query etc should be included as well.
 
 
 \subsection{Neurodata Without Borders Format}
