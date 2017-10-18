@@ -152,6 +152,8 @@ As a solution several attempts to provide a searching capability over HDF5 files
 
 Another approach \citep{6546110} creates a light-weight data management layer that allows running queries expressed in the SQL syntax on the metadata storage. The metadata are generated from HDF5 files in runtime.
 
+Last tested, most promising, working and easy-to-use solution HDFql\footnote{http://www.hdfql.com/} facilitates working with HDF5 files by providing a SQL-like language with CREATE, INSERT, SELECT or SHOW operations. Using this operations a user can easily create and read new datasets, groups or attributes. 
+
 Maybe something about HDF5 API, data, query etc should be included as well.
 
 
@@ -162,7 +164,7 @@ The aim of the Neurodata Without Borders project is to design a data format for 
 From the implementation point of view the HDF5 data format is used. This format is suitable because its easy-to-use, or does not require any specific software equipment installed on a user computer. It can be easily transfered between different computers and its internal structure provides sufficient means for storing both raw signal data and their metadata. The easy usability motivates several neuroscience initiatives and groups to implement their solution in HDF5 format as well. The NIX\footnote{https://github.com/G-Node/nix} defines a structure for storing raw data as a groups and datasets withing one HDF5 file together with metadata defined in their odML \citep{10.3389/fninf.2011.00016} format. Next,  Klustakwik\footnote{http://klusta.readthedocs.io/en/latest/} its an implementation of a HDF5 format for storage of spike sorting data. Orca\footnote{http://crcns.org/files/data/nwb/h1/NWBh1\_09\_Keith\_Godfrey.pdf} is a HDF5 format for storing electrophysiology and optophysiology data. BRAINformat \citep{10.3389/fninf.2016.00048} is a general framework for management of scientific data formats by their own concept of Managed Object representing individual semantic components of data formats.  
 
 
-The first version 1.0 is fully implemented and tested. Vesion 2.0 that has been developing removes some drawback of the previous one and adds a high-level API definition. The NWB Query Engine is supposed to be fully compatible and tested on the version 1.0. Moreower its internal implementation is designed to be compatible also with the version 2.0. Availability of the experiments stored in version 2.0 is only limiting factor to fully test it also on this version.
+The first version 1.0 is fully implemented and tested. Vesion 2.0 that has been developing removes some drawback of the previous one and adds a high-level API definition. The NWB Query Engine is supposed to be fully compatible and tested on the version 1.0. Moreover its internal implementation is designed to be compatible also with the version 2.0. Availability of the experiments stored in version 2.0 is only limiting factor to fully test it also on this version.
 
 NOTES: Something about NWB specification, specification language, implementation in HDF5, NWB 1.0 vs. 2.0
 
