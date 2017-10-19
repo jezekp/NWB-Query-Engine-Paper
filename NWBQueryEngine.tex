@@ -108,6 +108,7 @@ As a primary goal, the abstract should render the general significance and conce
  \keyFont{ \section{Keywords:} keyword, keyword, keyword, keyword, keyword, keyword, keyword, keyword} %All article types: you may provide up to 8 keywords; at least 5 are mandatory.
 \end{abstract}
 
+
 \section{Introduction}
 
 Data coming from neurophysiological experiments are heterogeneous and organized in various data formats. A data format is usually given by hardware and software equipment defined by the specific device vendor. This format cannot be easily changed or reused in different devices. Nowadays with increasing computational performance and disk storages capacity researchers are more and more motivated to preserve not only experimental results but also original data used for performing analysis. A new modern concept calls such data as "Big Data" defined as  three Vs. (1) Volume defining big data as data from variety of sources , (2) Velocity defining big data as data coming from sensors by unprecedented speed, and	(3) Variety saying that data are in all types of formats. Moreover, neurophysiological data go even more behind this concept. Their are multimodal and dynamic because single experiment can involve several signal acquisition modalities. With increasing number of experiments the problem of non-standarised datasets stored in non-standarised formats makes  difficult an effective management and sharing. Researchers point out that data are even more important then papers describing results observed from the data. It is because if results are described in scientific papers without an access to the original datasets their validation or refinement over time is practically impossible. As a solution several attempts to provide a standardized way of data storing have appeared. These approaches vary from free-form data storages based on a simple data model providing only basic data structure \citep{10.3389/fninf.2011.00016} to rigid data formats often based on fixed schema technologies implemented in relational databases (e. g. SciDB \citep{Brown:2010:OSL:1807167.1807271}) requiring strictly defined set of attributes. Last approach includes data formats based on Semantic Web technologies that aims to machine readable data accessed via the Internet. 
@@ -127,10 +128,12 @@ The paper is organized as follows: Section \ref{materials_and_methods} describes
 \label{materials_and_methods}
 
 \subsection{DataJoint}
+\label{DataJoint}
 
 DataJoint \citep{Yatsenko031658} is a tool aims to hide a complexity of relational schema and provide user a use-friendly Python or Matlab API for easy integration of the data storage with the clients system. Technically it can be understand as an Object-Relational Mapping \citep{Keith2010} for Matlab or Python based systems. The implementation maps database tables to Python classes allowing fetching data stored in the database to the instances of classes. DataJoint also defines basic operations on tuples such as conjunction \emph{A \& B} denoting relations comprising all tuples from A that match any tuple in B, disjunction \emph{A * B} denoting relations comprising tuples in A and in B, inverse \emph{A - B} denoting all tuples from A that do not match any tuple in B, projection etc \emph{A.pro(B)} that modifies heading of A by B.
 
 \subsection{HDF5}
+\label{HDF5}
 
 HDF5 format \citep{Koziol2011} provides following primitives to represent data:
 
@@ -158,13 +161,15 @@ Maybe something about HDF5 API, data, query etc should be included as well.
 
 
 \subsection{Neurodata Without Borders Format}
+\label{nwb}
 
 The aim of the Neurodata Without Borders project is to design a data format for storing a variety of neurophysiology data, including from intracellular and extracellular electrophysiology experiments, optical physiology experiments, as well as tracking and stimulus data.
 
 From the implementation point of view the HDF5 data format is used. This format is suitable because its easy-to-use, or does not require any specific software equipment installed on a user computer. It can be easily transfered between different computers and its internal structure provides sufficient means for storing both raw signal data and their metadata. The easy usability motivates several neuroscience initiatives and groups to implement their solution in HDF5 format as well. The NIX\footnote{https://github.com/G-Node/nix} defines a structure for storing raw data as a groups and datasets withing one HDF5 file together with metadata defined in their odML \citep{10.3389/fninf.2011.00016} format. Next,  Klustakwik\footnote{http://klusta.readthedocs.io/en/latest/} its an implementation of a HDF5 format for storage of spike sorting data. Orca\footnote{http://crcns.org/files/data/nwb/h1/NWBh1\_09\_Keith\_Godfrey.pdf} is a HDF5 format for storing electrophysiology and optophysiology data. BRAINformat \citep{10.3389/fninf.2016.00048} is a general framework for management of scientific data formats by their own concept of Managed Object representing individual semantic components of data formats.  
 
-
 The first version 1.0 is fully implemented and tested. Vesion 2.0 that has been developing removes some drawback of the previous one and adds a high-level API definition. The NWB Query Engine is supposed to be fully compatible and tested on the version 1.0. Moreover its internal implementation is designed to be compatible also with the version 2.0. Availability of the experiments stored in version 2.0 is only limiting factor to fully test it also on this version.
+
+The NWB data format defines a format specification languages saying what metadata are part of a so-called core format. These are common for all experiments stored within the format. For specific experiments a system of extensions is implemented. Extensions contain description of metadata that are not defined in the core format but are some for a specific kind of experiment. When an extension is used a resulted filed contains merge of core format and extension metadata.
 
 NOTES: Something about NWB specification, specification language, implementation in HDF5, NWB 1.0 vs. 2.0
 
@@ -174,7 +179,7 @@ NOTES: Something about NWB specification, specification language, implementation
 
 The experiments produce data of neuronal activity and behavioral measures from animals and humans. They consists largely of time series of measurements at varying sampling rates and associated metadata describing task parameters, anatomical locations of electrodes, etc. Moreover, they are organized in sessions hierarchically by subject / animal with multiple days of data per animal.
 
-\subsubsection{Typical Data Analysis Steps}
+\subsubsection{Typical Experimental Data and Metadata}
 \label{typical-data-analysis-steps}
 
 Typical experiment contains several steps that are needed to set up an environment and to arrange recordings. During recording data are collected by a measuring device. This device reads usually time series data from an amplifier. These data are stored on a measuring computer. When experiments ends stored data have to be supplement by descriptive metadata to be ready for archiving. Following text contains most often stored metadata from animal and human recording. The description is a high-level set of metadata typical for most experiments. For specific purposes a more accurate metadata with larger granularity can appear.
@@ -220,6 +225,8 @@ A specification of the NWB query engine should ensure at least following functio
 \subsection{Scope and Requirements}
 \label{Scope_and_requirements}
 
+Based on the usage of HDF5 (Section \ref{HDF5}) as a core format for the NWB format (Section \ref{nwb}), and definition of data types (Section \ref{data-types}) and (Section \ref{typical-data-analysis-steps}) the requirements for the NWB query engine are defined.  \ref{DataJoint} 
+
 NOTE: Merging attempts from Sections HDFql, DataJoint, High Level Specification into the NWB Query engine requirements
 
 \section{Results}
@@ -227,6 +234,8 @@ NOTE: Merging attempts from Sections HDFql, DataJoint, High Level Specification 
 
 \subsection{Architecture}
 \label{Architecture}
+
+--connectors interfaces
 
 \subsection{Implementation}
 \label{Implementation}
@@ -308,6 +317,9 @@ NOTE: Merging attempts from Sections HDFql, DataJoint, High Level Specification 
 \caption{Query Examples}
 \label{tab:query-examples}       % Give a unique label
 % For LaTeX tables use
+
+-- include also examples of roots whenever in the hierarchy
+
 
 \begin{tabular}{ |p{7cm}|p{9cm}| }
 \hline
