@@ -212,7 +212,7 @@ For human recording following metadata are typically stored:
 \subsection{Query Engine High Level Specification}
 \label{Query_engine_specification}
 
-According to typical scenarios defined in Section \ref{typical-data-analysis-steps} and data types defined in Section \ref{typical-data-analysis-steps} a minimal set of requirements on a NWB query engine have been defined.
+According to typical scenarios defined in Section \ref{typical-data-analysis-steps} and data types defined in Section \ref{data-types} a minimal set of requirements on a NWB query engine have been defined.
 
 A specification of the NWB query engine should ensure at least following functionality:
 \begin{enumerate}
@@ -225,15 +225,24 @@ A specification of the NWB query engine should ensure at least following functio
 \subsection{Scope and Requirements}
 \label{Scope_and_requirements}
 
-Based on the usage of HDF5 (Section \ref{HDF5}) as a core format for the NWB format (Section \ref{nwb}), and definition of data types (Section \ref{data-types}) and (Section \ref{typical-data-analysis-steps}) the requirements for the NWB query engine are defined.  \ref{DataJoint} 
-
-NOTE: Merging attempts from Sections HDFql, DataJoint, High Level Specification into the NWB Query engine requirements
+When HDF5 (Section \ref{HDF5}) as a core format for the NWB format (Section \ref{nwb}), the query engine is supposed to run on the top of an HDF5 file. Moreover, definition of data types (Section \ref{data-types}) give an idea what items are required for searching. Typical analysis steps (Section \ref{typical-data-analysis-steps}) define conditions and restrictions that are applied or searched metadata. Also basic logical, arithmetical and relational math operators have to be supported to support conjunction, disjunction, or intersection of partial results.
 
 \section{Results}
 \label{results}
 
+
 \subsection{Architecture}
 \label{Architecture}
+
+\begin{figure}
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+  \includegraphics[width=17cm]{architecture}
+% figure caption is below the figure
+\caption{Block Diagram of the Architecture of the NWB Query Engine}
+\label{fig:architecture}
+\end{figure}
+
 
 --connectors interfaces
 
@@ -381,6 +390,8 @@ NOTE: Merging attempts from Sections HDFql, DataJoint, High Level Specification 
 install steps etc.
 
 Can be run as a library, as a command line application, as a python gateway or from the web
+
+examples?
 
 \section{Discussion}
 \label{Discussion}
