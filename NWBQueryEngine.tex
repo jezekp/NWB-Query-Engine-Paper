@@ -225,7 +225,7 @@ A specification of the NWB query engine should ensure at least following functio
 \subsection{Scope and Requirements}
 \label{Scope_and_requirements}
 
-When HDF5 (Section \ref{HDF5}) as a core format for the NWB format (Section \ref{nwb}), the query engine is supposed to run on the top of an HDF5 file. Moreover, definition of data types (Section \ref{data-types}) give an idea what items are required for searching. Typical analysis steps (Section \ref{typical-data-analysis-steps}) define conditions and restrictions that are applied or searched metadata. Also basic logical, arithmetical and relational math operators have to be supported to support conjunction, disjunction, or intersection of partial results.
+When HDF5 (Section \ref{HDF5}) as a core format for the NWB format (Section \ref{nwb}), the query engine is supposed to run on the top of an HDF5 file. Moreover, definition of data types (Section \ref{data-types}) give an idea what items are required for searching. Typical analysis steps (Section \ref{typical-data-analysis-steps}) define conditions and restrictions that are applied or searched metadata. Also basic logical, arithmetical and relational math operators have to be supported to support conjunction, disjunction, or intersection of partial results. Moreover, solutions as a DataJoint mapping data from common relational-databases to python language must be taken into account because lot of scientific data is stored in relational databases.
 
 \section{Results}
 \label{results}
@@ -234,17 +234,21 @@ When HDF5 (Section \ref{HDF5}) as a core format for the NWB format (Section \ref
 \subsection{Architecture}
 \label{Architecture}
 
+Because specific requiremensts defined in Section \ref{Scope_and_requirements} a modular architecture has been designed. The NWB query engine contains three main components. The first component is a Query parser that takes a user query and parses it according to a grammar, described later in Section \ref{Query_Grammar}, and generates a subexpressions tree. Such expressions are managed by a next block NWB Processor. This processor iterates over a list of expressions that are executed on a NWB file implemented in HDF5 using a HDF5 Connector implemented in a third block File API. Data obtained from a NWB file are returned back to the NWB Processor wrapped in a NWB result. 
+
+The python server is last component of the core NWB Query Engine. This enables users to run the engine as a python server. This server can run on a local or remote host and queries can be executed from a python code.
+
+In order to make work with the engine even simpler we also developed a Web interface allowing to run the engine in a web container. Then data on a remote host are accessed from a simple web pages that enables run queries in a google-like search box. When matching files are found a user can download them.
+
 \begin{figure}
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
   \includegraphics[width=17cm]{architecture}
 % figure caption is below the figure
-\caption{Block Diagram of the Architecture of the NWB Query Engine}
+\caption{\textbf{Block Diagram of the Architecture of the NWB Query Engine. } A block NWB Query Engine is a core component including a Query Parser, File API and NWB Processor. The query parser translates a user input into an internal tree representation. The HDF5 connector creates individual expressions from this tree. These expressions are executed on a HDF5 file. Then obtained data are then wrapped in a NWBResult object that is returned back to the user. The individual blocks communicates via interfaces to facilitates e. g. its extension for different data storage. The Python server block enables run the query engine as a python endpoint called from a python code. The block Web Interface represents an additional tool the NWB Query Engine Web Interface is a user-friendly web page allowing running of queries from a web browser.}
 \label{fig:architecture}
 \end{figure}
 
-
---connectors interfaces
 
 \subsection{Implementation}
 \label{Implementation}
