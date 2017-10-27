@@ -250,12 +250,7 @@ In order to make work with the engine even simpler we also developed a Web inter
 \end{figure}
 
 
-\subsection{Implementation}
-\label{Implementation}
-
-From the implementation point of view the top component the query parser implements a grammar described in Section \ref{Query_Grammar}. 
-
-\subsubsection{Query Grammar}
+\subsection{Query Grammar}
 \label{Query_Grammar}
 
 Each query contains two parts separated by an "=". The left side is the name of target group or a dataset. The right side contains the name of a child of the target (i.e. an attribute or a dataset) together with a value restriction. Following operators are supported to define the value restrictions and logical operators allowing relational operations:
@@ -345,7 +340,7 @@ The NWB processor takes all leafs and starts evaluates them from top to down and
 % For tables use
 \begin{table}
 % table caption is above the table
-\caption{\textbf{Query Examples:} The left column show examples of typical queries executed on a NWB file while the right column describes an expected result}
+\caption{\textbf{Query Examples:} The left column show examples of typical queries executed on a NWB file while the right column describes an expected result.}
 \label{tab:query-examples}       % Give a unique label
 % For LaTeX tables use
 
@@ -374,6 +369,12 @@ The NWB processor takes all leafs and starts evaluates them from top to down and
 \label{fig:diagram}
 \end{figure}
 
+
+\subsection{Implementation}
+\label{Implementation}
+
+From the implementation point of view the top component the query parser implements a grammar described in Section \ref{Query_Grammar}. 
+
 \subsubsection{Python Gateway}
 \label{Python_Gateway}
 
@@ -397,6 +398,15 @@ The NWB processor takes all leafs and starts evaluates them from top to down and
 % figure caption is below the figure
 \caption{NWB Query Engine Web Interface Preview}
 \label{fig:diagram}
+\end{figure}
+
+\begin{figure}
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+  \includegraphics[width=17cm]{web-interface}
+% figure caption is below the figure
+\caption{\textbf{Web Interface the NWB Query Engine. }}
+\label{fig:architecture}
 \end{figure}
 
 \subsection{User Guide}
