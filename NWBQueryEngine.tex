@@ -375,10 +375,20 @@ The NWB processor takes all leafs and starts evaluates them from top to down and
 
 From the implementation point of view the top component \emph{the query parser} implements a grammar described in Section \ref{Query_Grammar} and returns a \emph{Query} object. The Query object is a wrapper for a list of expressions represented by a object \emph{Expression}. Such a parsed Query is an input point of \emph{the HDF5 Connector}. The Connector executes the query in a HDFfile and returns results wrapped in a list of \emph{NWBResult} objects. Evaluation of queries is ensured by a \emph{NWB Processor}. An abstraction of the modules is ensured by interfaces. \emph{Connector} is an interface for HDF5 Connector, \emph{Parser} is an interface to \emph{the Query parser} and \emph{Processor} abstracts NWB Processor. The input point of the application is ensured by an \emph{Input} interface. Their two implementations enables reading of data from files (\emph{FileInput} class) or from a ByteArray (\emph{ByteArray} class) respectively. Last important class is PyServer that enables calling the query engine from a python code as mentioned in Section \ref{Architecture}.
 
+From the technological stack of view our core components are implemented in Java language that allowed us to implement the described abstraction in a robust architecture its future extensions can be easily implemented. The core of HDF5 Connector uses methods from the HDFql library. This is a C++ solutions integrated with the Java application by a provided wrapper.
+
 \subsubsection{Python Gateway}
 \label{Python_Gateway}
 
-\begin{lstlisting}
+Nowadays Python is the most popular and most used language in neuroscience. There are even research topics \citep{10.3389/fninf.2015.00011} that aims to encourage interoperability and collaboration between python developers. There is noticed lot of neuroscience application based on the python language. There is lot of domains included e. g. graph-theoretical analysis of biomolecular networks or investigation of protein networks associated with Azheimer's disease. Also lot of python based libraries for machine learning exist. E. g. PyMVPA a  framework for analysis of fMRI, EEG and MEG, DataViewer 3D is an application for displaying and integrating data from multiple neuroimaging modalities. Next, VisionEgg and PsychoPy, both are applications using OpenGL to generate temporally and spatially precise, arbitrarily complex visual stimulation protocols.  Moreover lot of tools are written on the top of existing solutions written in C/C++ or Java languages. 
+
+These existing approaches motivate us to to implement an easy to use Python Gateway that provides an easy-to-use possibility of calling the NWB Query engine without knowledge of internal structure, implementation or used technologies. 
+
+We successfully used a Python-Java bridge Py4j\footnote{https://www.py4j.org/} that allows calling of Java code from a Python program. On the Query Engine side we implemented a simple Python Server what is a Py4j GatewayServer that runs and listen on a defined port. It allows execution of method defined as an entry point. The entry point in the Python Gateway is the \emph{Input} interface explained in Section \ref{Implementation}. 
+
+When the server is running the user on the client side can execute simple code described in Listing \ref{lst:python_code}.
+
+\begin{lstlisting}[caption={\emph{Example of calling the python server.} In the first step a JavaGateway is imported. From this point a JavaGateway can be accessed. When a Java Gateway is created the user can call an executeQuery method with two parameters (1) input file/dir and (2) required query. Next lines are common calling of python code as usual.},label={lst:python_code}]
  >>> from py4j.java_gateway import JavaGateway
  >>> from py4j.java_gateway import GatewayParameters
  >>> gateway = JavaGateway() # for localhost
