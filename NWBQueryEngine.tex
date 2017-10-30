@@ -401,13 +401,21 @@ When the server is running the user on the client side can execute simple code d
 \subsection{Web interface}
 \label{web_interface}
 
+Despite the fact the NWB Query engine can be easily deployed and used by being aware the usage of a tool can be still obstacle for some users. It is because lot of user working in laboratories do not have system administrators who could be helpful with the deployment of such a tool. Moreover current trends go toward to cloud based solutions installed on remote servers accessible via thin clients from users desktops. A concept of shifting neurodata laboratories from locally maintained systems to a cloud based solutions are discussed e. g \citep{ROSENTHAL2010342}. 
+
+Following this trend and to to make working with the NWB Query engine even much simpler we provided a web based system that allows execute queries on the NWB files comfortably from a web browser. Another motivation for us have been an assumption that data in laboratories are stored on a central data storage and not distributed over individual working stations. We have supposed that such a web interface facilitates searching within data also for not experienced users.
+
+The web interface preview is in Figure \ref{web_interface}. It is a simple and clear page with only a basic information and a search box for the user input query. When the user run a query it is executed on background. Because it can be a time consuming task when lot of data is stored the web page is implemented dynamically. It concretely means that data are read and displayed in sequence once they are loaded. Moreover a progress bar informs the user how many data is browsed already. Once a required file is found the user can download it.
+
+From the technological point of view the Wen Interface is implemented in a Spring framework. It is a implementation of Dependency Injection design pattern that allows, besides, easily integrates various modules and it provides integration with other used technologies. Namely Wicket, used for the user layer, is an Ajax-based framework used for dynamic loading of data. Next, Apache Bootstrap is a library of CSS templates that facilitated designing of the web page.
+
 \begin{figure}
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
   \includegraphics[width=17cm]{nwb-query-engine-web}
 % figure caption is below the figure
-\caption{NWB Query Engine Web Interface Preview}
-\label{fig:diagram}
+\caption{\emph{NWB Query Engine Web Interface Preview.} The web interface provides a Google-like search box. The progress bar informs the user the percentage of browsed files. A table with result is displayed gradually. The table informs the user about a name of file with requested data, the name of dataset where data has been found, the current value of the dataset, and a link for downloading the file.}
+\label{fig:web-interface}
 \end{figure}
 
 \begin{figure}
@@ -415,7 +423,7 @@ When the server is running the user on the client side can execute simple code d
 % For example, with the graphicx package use
   \includegraphics[width=17cm]{web-interface}
 % figure caption is below the figure
-\caption{\textbf{Web Interface the NWB Query Engine. }}
+\caption{\textbf{Web Interface the NWB Query Engine.} The Web Interface is a common three layer architecture. We implemented it in the Spring Framwework. Data Layer accessed NWB data via the NWB Query Engine and returns results to the view layer via the service layer. The view layer is implemented in the Wicket framework.}
 \label{fig:architecture}
 \end{figure}
 
@@ -431,6 +439,7 @@ examples?
 
 !todo! Comparission of DataJoint, limitations of HDFql, why NWB Query Engine is such a good tool. What are its limits, how to solve them in the future?
 
+\section{Conclusion}
 
 
 \section*{Conflict of Interest Statement}
