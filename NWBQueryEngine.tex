@@ -373,7 +373,7 @@ The NWB processor takes all leafs and starts evaluates them from top to down and
 \subsection{Implementation}
 \label{Implementation}
 
-From the implementation point of view the top component the query parser implements a grammar described in Section \ref{Query_Grammar}. 
+From the implementation point of view the top component \emph{the query parser} implements a grammar described in Section \ref{Query_Grammar} and returns a \emph{Query} object. The Query object is a wrapper for a list of expressions represented by a object \emph{Expression}. Such a parsed Query is an input point of \emph{the HDF5 Connector}. The Connector executes the query in a HDFfile and returns results wrapped in a list of \emph{NWBResult} objects. Evaluation of queries is ensured by a \emph{NWB Processor}. An abstraction of the modules is ensured by interfaces. \emph{Connector} is an interface for HDF5 Connector, \emph{Parser} is an interface to \emph{the Query parser} and \emph{Processor} abstracts NWB Processor. The input point of the application is ensured by an \emph{Input} interface. Their two implementations enables reading of data from files (\emph{FileInput} class) or from a ByteArray (\emph{ByteArray} class) respectively. Last important class is PyServer that enables calling the query engine from a python code as mentioned in Section \ref{Architecture}.
 
 \subsubsection{Python Gateway}
 \label{Python_Gateway}
@@ -419,7 +419,7 @@ examples?
 \section{Discussion}
 \label{Discussion}
 
-!todo! Comparrision of DataJoint, limitations of HDFql, why NWB Query Engine is such a good tool. What are its limits, how to solve them in the future?
+!todo! Comparission of DataJoint, limitations of HDFql, why NWB Query Engine is such a good tool. What are its limits, how to solve them in the future?
 
 
 
