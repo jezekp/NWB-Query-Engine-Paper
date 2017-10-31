@@ -186,7 +186,7 @@ Typical experiment contains several steps that are needed to set up an environme
 
 Typical animal recording contains following metadata groups:
 
-\begin{enumerate}
+\begin{itemize}
  \item Epochs information - Names with start and end times for each period is stored together with information such as exposure number. 
  \item Electrode location - Anatomical location for each electrode
  \item Cell properties information - clustered cells information
@@ -194,18 +194,18 @@ Typical animal recording contains following metadata groups:
  \item LFP Events - Start and end time
  \item Animal position
  \item Times of task events
-\end{enumerate}
+\end{itemize}
 
 For human recording following metadata are typically stored:
 
-\begin{enumerate}
+\begin{itemize}
  \item Epochs information - Names with start and end times for each period is stored together with information such as exposure number
  \item Electrode location - Anatomical location for each electrode in native and standard atlas space.
  \item Potentials from each electrode - Including multiple different ranges (LFP, deltha, theta, alpha, gamma etc.)
  \item Start end stop time of specific detected event
  \item Signal artifacts - Movement, bad electrode etc.
  \item Stimulus information - time of stimulus onset, stimulus name, stimulus type and stimulus metadata
-\end{enumerate}
+\end{itemize}
 
 
 
@@ -435,11 +435,13 @@ Both projects are hosted in are hosted in GitHub repositories: The NWB Query Eng
 
 The installation of both is step-by-step described in project repositories anyway, but the most substantial steps are:  Minimal common requirement for running is to have installed JRE 8\footnote{http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html}. When the query engine is called from the python code a py4j python library\footnote{https://www.py4j.org/install.html} is required. The web interface runs in Apache Tomcat\footnote{https://tomcat.apache.org/download-80.cgi} web container. Being aware of the fact that running and configuring a tomcat container we also provided a docker file for easy build of a docker image.
 
-install steps etc.
+The NWB Query Engine can be operated in three ways:
+\begin{enumerate}
+ \item A standalone application - in this case the command line application taking two arguments is available. The first argument is a NWB file or a directory with NWB files while the second one is a query. The results are printed to standard output.
+ \item A library function - If the Query engine is integrated to a 3rd party tool. An input point is the Input interface as mentioned in Section \ref{Implementation}. Maven artifact is released and described in the project repo.
+ \item A Python server - If the Query engine is run with a command line parameter \emph{pyserver} it starts as a Python Gateway. Now it can be called from a python code as described in \ref{Python_Gateway}.
+\end{enumerate}
 
-Can be run as a library, as a command line application, as a python gateway or from the web
-
-examples?
 
 \section{Discussion}
 \label{Discussion}
