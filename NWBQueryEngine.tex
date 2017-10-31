@@ -401,13 +401,15 @@ When the server is running the user on the client side can execute simple code d
 \subsection{Web interface}
 \label{web_interface}
 
-Despite the fact the NWB Query engine can be easily deployed and used by being aware the usage of a tool can be still obstacle for some users. It is because lot of user working in laboratories do not have system administrators who could be helpful with the deployment of such a tool. Moreover current trends go toward to cloud based solutions installed on remote servers accessible via thin clients from users desktops. A concept of shifting neurodata laboratories from locally maintained systems to a cloud based solutions are discussed e. g \citep{ROSENTHAL2010342}. 
+Despite the fact the NWB Query engine can be easily deployed and used there are still some not so experienced users for whom it could be an obstacle. One reason could be the fact that lot of laboratories do not have system administrators who could deploy such a tool to laboratory computers. Moreover current trends go toward to cloud based solutions installed on remote servers accessible via thin clients from users desktops. A concept of shifting neurodata laboratories from locally maintained systems to a cloud based solutions are discussed e. g \citep{ROSENTHAL2010342}. These solutions do not require to install software on individual computer but are maintained centrally on a remote servers. 
 
-Following this trend and to to make working with the NWB Query engine even much simpler we provided a web based system that allows execute queries on the NWB files comfortably from a web browser. Another motivation for us have been an assumption that data in laboratories are stored on a central data storage and not distributed over individual working stations. We have supposed that such a web interface facilitates searching within data also for not experienced users.
+Following this trend and to to make working with the NWB Query engine even much simpler we provided a web based system that allows execution of queries in the NWB files comfortably from a web browser. Another motivation for us have been an assumption that data in laboratories are stored in a central data storage uploaded from individual working stations. We have supposed that such a web interface facilitates searching within data without requiring specific software installation on users computers.
 
-The web interface preview is in Figure \ref{web_interface}. It is a simple and clear page with only a basic information and a search box for the user input query. When the user run a query it is executed on background. Because it can be a time consuming task when lot of data is stored the web page is implemented dynamically. It concretely means that data are read and displayed in sequence once they are loaded. Moreover a progress bar informs the user how many data is browsed already. Once a required file is found the user can download it.
+The web interface preview is in Figure \ref{web_interface}. It is a simple and clear page with only basic information. A central element is a search box for the user input query. When the user run a query the NWB query engine is called on the background. Because this task can be time consuming because lot of data can be stored in the server, the web page is implemented dynamically. It concretely means that data are read and displayed in sequence once they are loaded. Moreover a progress bar informs the user how many data files have been browsed already. Once a required files are found the user can download them.
 
-From the technological point of view the Wen Interface is implemented in a Spring framework. It is a implementation of Dependency Injection design pattern that allows, besides, easily integrates various modules and it provides integration with other used technologies. Namely Wicket, used for the user layer, is an Ajax-based framework used for dynamic loading of data. Next, Apache Bootstrap is a library of CSS templates that facilitated designing of the web page.
+From the technological point of view the web Interface is implemented in a Spring framework. It is a implementation of Dependency Injection design pattern that helps with an easy integration of various modules. It also integrates other used technologies. Namely Wicket framework, used as a user layer. It is an Ajax-based framework implements dynamic loading of data. Next, The design of web pages is given by  Apache Bootstrap framework. Its is a library of predefined CSS templates that ready to be deployed immediately.
+
+todo: Add URL once is available.
 
 \begin{figure}
 % Use the relevant command to insert your figure file.
@@ -428,6 +430,11 @@ From the technological point of view the Wen Interface is implemented in a Sprin
 \end{figure}
 
 \subsection{User Guide}
+
+Both projects are hosted in are hosted in GitHub repositories: The NWB Query Engine in \url{https://github.com/jezekp/NwbQueryEngine} and and the web interface in \url{https://github.com/jezekp/nwbQueryEngineWebInterface}. 
+
+The installation of both is step-by-step described in project repositories anyway, but the most substantial steps are:  Minimal common requirement for running is to have installed JRE 8\footnote{http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html}. When the query engine is called from the python code a py4j python library\footnote{https://www.py4j.org/install.html} is required. The web interface runs in Apache Tomcat\footnote{https://tomcat.apache.org/download-80.cgi} web container. Being aware of the fact that running and configuring a tomcat container we also provided a docker file for easy build of a docker image.
+
 install steps etc.
 
 Can be run as a library, as a command line application, as a python gateway or from the web
