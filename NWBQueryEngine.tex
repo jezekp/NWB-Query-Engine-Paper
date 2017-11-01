@@ -446,9 +446,27 @@ The NWB Query Engine can be operated in three ways:
 \section{Discussion}
 \label{Discussion}
 
-!todo! Comparission of DataJoint, limitations of HDFql, why NWB Query Engine is such a good tool. What are its limits, how to solve them in the future?
+This paper is a part of the current approach to provide a standardized way to store and access data produced in electrophysiology. Long term experiences of interested laboratories resulted in a development of an unified data format Neurodata Without Borders. Taking into account the fact once data are stored they must be also effectively queried and retrieved an innovative approach and its technological design has been implemented. Because of innovativeness of the NWB format a new solution implemented basically from scratch has been an inevitable step. However described use-cases provided a good overview of requirements according them the presented solution has been implemented.
 
-\section{Conclusion}
+Despite the narrow specialization of the solution for the NWB data format the proposed solution uses some general concept that can be reused in other domains. Moreover implemented modular structure facilitates its extension to various data sources.
+
+As a starting point we took into account defined structure of the NWB data format. The typical electrophysiology experimental steps gave us a specification of the developed query engine. 
+
+We also browsed solutions working on top of relational databases such as DataJoint. Although the NWB data format is based on a different concept then relational database based solutions are an important take away was a fact that queries based on a SQL language are not suitable for end-users in electrophysiology. We also took an inspiration of relational algebra.
+
+When the NWB data format is based on HDF5 file we took into account also the internal structure of this data container. Based on the use-cases and the NWB format structure we found that queries should be generally executed on groups and related datasets of these groups or on the the group or datasets attributes.
+
+Based on the requirements of an easier language that e. g. SQL is and on the known structure of the format, and relational algebra described in DataJoint we implemented a simpler query language containing basic relational operations executed on groups, datasets or attributes.
+
+The presented query language we practically implemented in a very generic and easy-to-use application. This application contains several modules easily extensible by implementing of connectors for various data storages. We present here an implementation of HDF5 Connector that allows execute queries on the NWB files serialized in HDF5 files. However if in future a different data storage is used the query language can be easily extended by implementing another connector.
+
+The HDF5 Connector uses internally the HDFql library that facilitates accessing of groups and datasets in a HDF5 file. All other execution is performed on the top of this connector. It in result makes the query engine independent of HDF5 implementation. The usage of HDFql could be a limiting factor if the support of this library ends but actual separation of the separation of the modules does not affect the engine core. 
+
+For python users we provide a python gateway. Non experienced users a web based interface that can be easily installed on a laboratory server and accessed by a complete team participating in experiments.
+
+There are two versions of the NWB format. We have fully tested the presented solution on the NWB 1.0 version on a set of more then one hundred single data files. On the version 2.0 we are limited only by the current non-existence of files stored in this version. However the presented concepts are defined and implemented sufficiently general to work on the new version and also on possible future versions.
+
+!todo! Comparission of DataJoint, limitations of HDFql, why NWB Query Engine is such a good tool. What are its limits, how to solve them in the future?
 
 
 \section*{Conflict of Interest Statement}
