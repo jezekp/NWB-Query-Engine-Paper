@@ -357,7 +357,7 @@ The NWB processor takes all leafs and starts evaluates them from top to down and
 \begin{figure}
 % Use the relevant command to insert your figure file.
 % For example, with the graphicx package use
-  \includegraphics[width=17cm]{diagram}
+  \includegraphics[width=18cm]{diagram3}
 % figure caption is below the figure
 \caption{UML Diagram of the NWB Query Engine}
 \label{fig:diagram}
@@ -367,9 +367,9 @@ The NWB processor takes all leafs and starts evaluates them from top to down and
 \subsection{Implementation}
 \label{Implementation}
 
-From the implementation point of view the top component \emph{the query parser} implements a grammar described in Section \ref{Query_Grammar} and returns a \emph{Query} object. The Query object is a wrapper for a list of expressions represented by a object \emph{Expression}. Such a parsed Query is an input point of \emph{the HDF5 Connector}. The Connector executes the query in a HDFfile and returns results wrapped in a list of \emph{NWBResult} objects. Evaluation of queries is ensured by a \emph{NWB Processor}. An abstraction of the modules is ensured by interfaces. \emph{Connector} is an interface for HDF5 Connector, \emph{Parser} is an interface to \emph{the Query parser} and \emph{Processor} abstracts NWB Processor. The input point of the application is ensured by an \emph{Input} interface. Their two implementations enables reading of data from files (\emph{FileInput} class) or from a ByteArray (\emph{ByteArray} class) respectively. Last important class is PyServer that enables calling the query engine from a python code as mentioned in Section \ref{Architecture}.
+From the implementation point of view the top component \emph{QueryParser} implements a grammar described in Section \ref{Query_Grammar} and returns a \emph{Query} object. The Query object is a wrapper for a list of expressions represented by an object \emph{Expression}. Such a parsed query is an input point of \emph{HDF5Connector}. The connector executes the query in a NWB file and returns results wrapped in a list of \emph{NWBResult} objects. The core of HDF5 connector uses methods from the HDFql library. Technically it is a  C++ solution integrated with a Java application by a provided wrapper. Evaluation of queries is ensured by \emph{NWBProcessor}. The modules communicates via interfaces. Namely \emph{Connector} is an interface for \emph{HDF5Connector}, \emph{Parser} is an interface for \emph{QueryParser} and \emph{Processor} is an interface for \emph{NWBProcessor}. The input point of the application is an \emph{Input} interface. Their two implementations enable reading of data from a file (\emph{FileInput} class) or from a byte array (\emph{ByteArray} class) respectively. Last described class is \emph{PyServer} that enables calling the query engine from a python code as mentioned in Section \ref{Architecture}. An UML diagram showing complete implementation is in Figure \ref{fig:diagram}.
 
-From the technological stack of view our core components are implemented in Java language that allowed us to implement the described abstraction in a robust architecture its future extensions can be easily implemented. The core of HDF5 Connector uses methods from the HDFql library. This is a C++ solutions integrated with the Java application by a provided wrapper.
+From the technological stack of view the core components are implemented in a Java language that facilitates the implementation of the sufficiently robust and abstract tool its future extensions is easy and require only minimal programming effort. 
 
 \subsubsection{Python Gateway}
 \label{Python_Gateway}
