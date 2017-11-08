@@ -153,7 +153,7 @@ As a solution several attempts to provide a searching capability over HDF5 files
 
 Another approach \citep{6546110} creates a light-weight data management layer that allows running queries expressed in the SQL syntax on the metadata storage. The metadata are generated from HDF5 files in runtime.
 
-Last tested, HDFql\footnote{http://www.hdfql.com/} facilitates working with HDF5 files by providing a SQL-like language with CREATE, INSERT, SELECT or SHOW operations. Using this operations a user can easily create and read new datasets, groups or attributes. 
+Last tested, HDFql\footnote{\url{http://www.hdfql.com/}} facilitates working with HDF5 files by providing a SQL-like language with CREATE, INSERT, SELECT or SHOW operations. Using this operations a user can easily create and read new datasets, groups or attributes. 
 
 
 \subsection{Neurodata Without Borders Format}
@@ -161,7 +161,7 @@ Last tested, HDFql\footnote{http://www.hdfql.com/} facilitates working with HDF5
 
 The aim of the Neurodata Without Borders project is to design a data format for storing a variety of neurophysiology data, including intracellular and extracellular electrophysiology experiments, optical physiology experiments, as well as tracking and stimulus data.
 
-From the implementation point of view the HDF5 data format is used. This format is suitable because its easy-to-use, it does not require any specific software equipment installed on a user computer. It can be easily transfered between different computers and its internal structure provides sufficient means for storing both raw signal data and their metadata. The easy usability motivates several neuroscience initiatives and groups to implement their solution in HDF5 format as well. The NIX\footnote{https://github.com/G-Node/nix} defines a structure for storing raw data as a groups and datasets withing one HDF5 file together with metadata defined in their odML \citep{10.3389/fninf.2011.00016} format. Next,  Klustakwik\footnote{http://klusta.readthedocs.io/en/latest/} its an implementation of a HDF5 format for storage of spike sorting data. Orca\footnote{http://crcns.org/files/data/nwb/h1/NWBh1\_09\_Keith\_Godfrey.pdf} is a HDF5 format for storing electrophysiology and optophysiology data. BRAINformat \citep{10.3389/fninf.2016.00048} is a general framework for management of scientific data formats by their own concept of Managed Object representing individual semantic components of data formats.  
+From the implementation point of view the HDF5 data format is used. This format is suitable because its easy-to-use, it does not require any specific software equipment installed on a user computer. It can be easily transfered between different computers and its internal structure provides sufficient means for storing both raw signal data and their metadata. The easy usability motivates several neuroscience initiatives and groups to implement their solution in HDF5 format as well. The NIX\footnote{\url{https://github.com/G-Node/nix}} defines a structure for storing raw data as a groups and datasets withing one HDF5 file together with metadata defined in their odML \citep{10.3389/fninf.2011.00016} format. Next,  Klustakwik\footnote{\url{http://klusta.readthedocs.io/en/latest/}} its an implementation of a HDF5 format for storage of spike sorting data. Orca\footnote{\url{http://crcns.org/files/data/nwb/h1/NWBh1\_09\_Keith\_Godfrey.pdf}} is a HDF5 format for storing electrophysiology and optophysiology data. BRAINformat \citep{10.3389/fninf.2016.00048} is a general framework for management of scientific data formats by their own concept of Managed Object representing individual semantic components of data formats.  
 
 The version 1.0 is already and tested. Vesion 2.0 that that is currently under development removes some drawback of the previous one and adds a high-level API definition. The NWB Query Engine is fully compatible and tested on the version 1.0. Moreover its internal implementation is designed to be compatible also with the version 2.0. Availability of the experiments stored in version 2.0 is only limiting factor.
 
@@ -378,7 +378,7 @@ Nowadays Python is the most popular and most used language in neuroscience. Ther
 
 Existing approaches motivate us to to implement a Python Gateway that provides an easy-to-use possibility of calling the NWB Query engine without knowledge of internal implementation or used technologies. 
 
-We used a Python-Java bridge Py4j\footnote{https://www.py4j.org/} that allows calling of Java code from a Python program. On the Query Engine side we implemented a simple Python Server what is a Py4j GatewayServer that runs and listen on a defined port. It allows execution of method defined as an entry point. The entry point in the Python Gateway is the \emph{Input} interface explained in Section \ref{Implementation}. 
+We used a Python-Java bridge Py4j\footnote{\url{https://www.py4j.org/}} that allows calling of Java code from a Python program. On the Query Engine side we implemented a simple Python Server what is a Py4j GatewayServer that runs and listen on a defined port. It allows execution of method defined as an entry point. The entry point in the Python Gateway is the \emph{Input} interface explained in Section \ref{Implementation}. 
 
 When the server is running the user on the client side can execute simple code described in Listing \ref{lst:python_code}.
 
@@ -419,48 +419,47 @@ todo: Add URL once is available.
 % For example, with the graphicx package use
   \includegraphics[width=17cm]{web-interface}
 % figure caption is below the figure
-\caption{\textbf{Web Interface the NWB Query Engine.} The Web Interface is a common three layer architecture. We implemented it in the Spring Framwework. Data Layer accessed NWB data via the NWB Query Engine and returns results to the view layer via the service layer. The view layer is implemented in the Wicket framework.}
+\caption{\textbf{Web Interface the NWB Query Engine.} The Web Interface is implemented in a common three layer architecture. We used the Spring Framwework. The data layer accesses data via the NWB Query Engine and returns results to the view layer via the service layer. The view layer is implemented in the Wicket framework.}
 \label{fig:architecture}
 \end{figure}
 
 \subsection{User Guide}
 
-Both projects are hosted in are hosted in GitHub repositories: The NWB Query Engine in \url{https://github.com/jezekp/NwbQueryEngine} and and the web interface in \url{https://github.com/jezekp/nwbQueryEngineWebInterface}. 
+Both projects, The NWB Query Engine\footnote{\url{https://github.com/jezekp/NwbQueryEngine}} and the web interface\footnote{\url{https://github.com/jezekp/nwbQueryEngineWebInterface}} are hosted in GitHub repositories. 
 
-The installation of both is step-by-step described in project repositories anyway, but the most substantial steps are:  Minimal common requirement for running is to have installed JRE 8\footnote{http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html}. When the query engine is called from the python code a py4j python library\footnote{https://www.py4j.org/install.html} is required. The web interface runs in Apache Tomcat\footnote{https://tomcat.apache.org/download-80.cgi} web container. Being aware of the fact that running and configuring a tomcat container we also provided a docker file for easy build of a docker image.
+The installation of both projects is step-by-step described in project repositories.  Minimal common requirement for running is to have installed JRE 8\footnote{\url{http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html}}. When the query engine is called from a python code a py4j python library\footnote{\url{https://www.py4j.org/install.html}} is required in python installation. The web interface runs in the Apache Tomcat\footnote{\url{https://tomcat.apache.org/download-80.cgi}} web container. Being aware of the fact that running and configuring a tomcat container could be an obstacle for some user we also provided a docker\footnote{\url{https://www.docker.com/}} file for easy build of a docker image.
 
 The NWB Query Engine can be operated in three ways:
 \begin{enumerate}
- \item A standalone application - in this case the command line application taking two arguments is available. The first argument is a NWB file or a directory with NWB files while the second one is a query. The results are printed to standard output.
- \item A library function - If the Query engine is integrated to a 3rd party tool. An input point is the Input interface as mentioned in Section \ref{Implementation}. Maven artifact is released and described in the project repo.
- \item A Python server - If the Query engine is run with a command line parameter \emph{pyserver} it starts as a Python Gateway. Now it can be called from a python code as described in \ref{Python_Gateway}.
+ \item A standalone application - In this case running the tool as a command line application taking two arguments is possible. The first argument is a NWB file or a directory with NWB files while the second one is a query. The results are printed to a standard output.
+ \item A library function - The Query engine is integrated to a 3rd party tool. An input point is the \emph{Input} interface as mentioned in Section \ref{Implementation}. The client program only calls methods from this interface. Results are returned in the \emph{NWBResult} object. Easy integration with third-party tools is ensured by a Maven\footnote{https://maven.apache.org/} artifact released and described in the project repository.
+ \item A Python server - If the Query engine is run with a command line parameter \emph{pyserver} it starts as a Python Gateway. Now it can be called from a python code as described in Section \ref{Python_Gateway}.
 \end{enumerate}
 
 
 \section{Discussion}
 \label{Discussion}
 
-This paper is a part of the current approach to provide a standardized way to store and access data produced in electrophysiology. Long term experiences of interested laboratories resulted in a development of an unified data format Neurodata Without Borders. Taking into account the fact once data are stored they must be also effectively queried and retrieved an innovative approach and its technological design has been implemented. Because of innovativeness of the NWB format a new solution implemented basically from scratch has been an inevitable step. However described use-cases provided a good overview of requirements according them the presented solution has been implemented.
+This paper is a part of the current approach to provide a standardized way to store and access data produced in neurophysiology. Long term experiences of interested laboratories resulted in a development of a unified data format Neurodata Without Borders. Taking into account the fact that once data are stored they must be effectively queried an innovative approach and its technological design is presented. Because of innovativeness of the NWB format a new solution implemented basically from scratch has been an inevitable step. However described use-cases provided a good overview of requirements according them the presented solution has been implemented.
 
-Despite the narrow specialization of the solution for the NWB data format the proposed solution uses some general concept that can be reused in other domains. Moreover implemented modular structure facilitates its extension to various data sources.
+Despite the narrow to the NWB data format the proposed solution is based on  general concepts that can be reused in other domains. Moreover implemented modular structure facilitates its extension to various data sources.
 
-As a starting point we took into account defined structure of the NWB data format. The typical electrophysiology experimental steps gave us a specification of the developed query engine. 
+As a starting point we took into account defined structure of the NWB data format. The typical neurophysiology experimental set-ups gave us a specification of the developed query engine. 
 
-We also browsed solutions working on top of relational databases such as DataJoint. Although the NWB data format is based on a different concept then relational database based solutions are an important take away was a fact that queries based on a SQL language are not suitable for end-users in electrophysiology. We also took an inspiration of relational algebra.
+We also tested solutions working on top of relational databases such as DataJoint. Although the NWB data format is based on a different concept then relational database based solutions we tool an inspiration of relational algebra implemented in DataJoint. We also took into account a need to maintain a support for python programmers. 
 
-When the NWB data format is based on HDF5 file we took into account also the internal structure of this data container. Based on the use-cases and the NWB format structure we found that queries should be generally executed on groups and related datasets of these groups or on the the group or datasets attributes.
+Because the NWB data format is implemented in HDF5 we took into account also the internal structure of this data container. Based on the use-cases and the NWB format structure we found that most flexible solution would require to provide searching on granularity given by the system of groups, datasets and attributes.
 
-Based on the requirements of an easier language that e. g. SQL is and on the known structure of the format, and relational algebra described in DataJoint we implemented a simpler query language containing basic relational operations executed on groups, datasets or attributes.
+Based on the requirements of an easier language then SQL is and on the known structure of the format, and relational algebra described in DataJoint we implemented a simple query language containing basic relational operations executed on groups, datasets or attributes.
 
-The presented query language we practically implemented in a very generic and easy-to-use application. This application contains several modules easily extensible by implementing of connectors for various data storages. We present here an implementation of HDF5 Connector that allows execute queries on the NWB files serialized in HDF5 files. However if in future a different data storage is used the query language can be easily extended by implementing another connector.
+The presented query language we practically implemented in a generic and easy-to-use application. This application contains several modules easily extensible by implementing of connectors for various data storages. We present here an implementation of HDF5 connector that allows running of queries on the NWB files implemented in HDF5. However if in the future a different data storage is required the query language can be easily extended by implementing another connector.
 
-The HDF5 Connector uses internally the HDFql library that facilitates accessing of groups and datasets in a HDF5 file. All other execution is performed on the top of this connector. It in result makes the query engine independent of HDF5 implementation. The usage of HDFql could be a limiting factor if the support of this library ends but actual separation of the separation of the modules does not affect the engine core. 
+The HDF5 connector internally uses the HDFql library that facilitates accessing of groups and datasets in an HDF5 file. All other executions are performed on the top of this connector. It in result makes the query engine independent of the HDF5 implementation. The usage of HDFql could be possibly a limiting factor if the support of this library ended. However due to  separation of the modules would not affect the engine core. 
 
-For python users we provide a python gateway. Non experienced users a web based interface that can be easily installed on a laboratory server and accessed by a complete team participating in experiments.
+For python users we provided a python gateway. Non programmers can use a web based interface that can be easily installed on a laboratory server and accessed by a complete team participating in experiments.
 
-There are two versions of the NWB format. We have fully tested the presented solution on the NWB 1.0 version on a set of more then one hundred single data files. On the version 2.0 we are limited only by the current non-existence of files stored in this version. However the presented concepts are defined and implemented sufficiently general to work on the new version and also on possible future versions.
+There are two versions of the NWB format. We have fully tested the presented solution on the NWB version 1.0 on a set of more then one hundred single data files. On the version 2.0 we are limited only by the current non-existence of files stored in this version. However the presented concepts are defined and implemented sufficiently general to work on the new version and also on possible future versions.
 
-!todo! Comparission of DataJoint, limitations of HDFql, why NWB Query Engine is such a good tool. What are its limits, how to solve them in the future?
 
 
 \section*{Conflict of Interest Statement}
