@@ -24,6 +24,8 @@
 \usepackage{lscape}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
+\usepackage[colorinlistoftodos]{todonotes}
+
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -110,7 +112,7 @@ As a primary goal, the abstract should render the general significance and conce
 
 
 \section{Introduction}
-
+  
 
 Data from neuroscience experiments are heterogeneous and stored in various data formats. A data format is usually given by hardware and software equipment defined by a specific device vendor. Such proprietary formats cannot be easily changed or reused in different devices. Nowadays with increasing computational performance and disks capacity researchers are more motivated to preserve not only experimental results but also original data used for analysis. A new modern concept calls such data as "Big Data" defined as three Vs\citep{mcafee2012big}. (1) Volume defining big data as data from variety of sources, (2) Velocity defining big data as data coming from sensors by unprecedented speed, and (3) Variety saying that data are in all types of formats. Moreover, neurophysiological data go even more behind this concept. They are multimodal and dynamic because a single experiment can involve several signal acquisition modalities. With increasing number of experiments the proliferation of non-standardized data formats makes the effective management and sharing of data difficult. Researchers point out that data are even more important then papers describing results observed from the data. This is because if results are described in scientific papers without access to the original datasets their validation or refinement over time is practically impossible. As a solution several attempts to provide a standardized way of data storing have appeared. These approaches vary from free-form data storages based on a simple data model providing only basic data structure\citep{10.3389/fninf.2011.00016} to rigid data formats often based on fixed schema technologies implemented in relational databases (e. g. CoCoMac \citep{10.3389/fninf.2012.00030,Kotter2004}) requiring strictly defined set of attributes. 
  
@@ -123,11 +125,23 @@ Many approaches are in preliminary implementation or do not provide a satisfacto
 
 Once the first pilot version of the format and the API has been released questions on how to effectively query data stored in the NWB format arose. While relational databases based solutions are queried by well-described SQL, data storages based on Semantic Web technologies are queried by SPARQL \citep{prudhommeaux2008sparql} a satisfactory query engine for the NWB format does not exist. 
 
-As a solution the NWB Query engine that aims to provide an easy-to-use way to query dataset stored in the NWB format is presented. 
+Although a main motivation of this paper has been driven by a lack of a query engine for the NWB data format, rather than to propose a solution narrowly focused solely on the NWB data format the concept of this paper is a approach for querying scientific data.
+
+Being aware of existing query languages such as SQL for relational databases or SPARQL for the semantic web we realized that there is a gap in providing an easy-to-use query engine that is not bounded with a specific technology relying on a relational database or a SPARQL endpoint. The initial idea of SQL was to provide a language semantically and syntactically close to a natural language. Data were supposed easily accessible by a unified way without having knowledge of relational databases design. However it did not happen. Although SQL is a powerful language providing sufficient means for querying stored data its complexity requires a certain level of database systems knowledge. SPARQL language is based on a similar concept but focused on RDF triples instead of a relational schema. The complexity of SPARQL is also substantial what makes it difficult to use by a non semantic web experts.
+
+To bring data closer to user as a solution data stored in relational databases are usually accessed by application programs. An aim of these programs is to provide mapping of data from databases to a user interface. Such programs are responsible for creating SQL queries according to user inputs. Anyway it requires continuous effort in maintaining of programs by application programmers especially when a data model is changed. This effort is dependent on manpower that must be available all the time.
+
+Moreover lot of data is stored in file-based data formats that do not provide any possibility to query content of these files. SQL or SPARQl approaches do not work for these files at all. 
+
+The main motivation of this paper is to bring a query language that is independent of a specific implementation of data storage. The query language is relatively simply to use without knowledge of current implementation of a data storage. 
+
+The NWB data format is used as a practical use-case to validate presented approach.
+
 The paper is organized as follows: Section \ref{materials_and_methods} describes state of the art in developing of data formats for neurophysiological experiments, existing frameworks for querying stored data, and defines use-cases and specifications of the query engine. Then Section  \ref{results}  deals with the developed architectonic concept, describes implementation details and a user guide. Last Section before Conclusion, Section  \ref{Discussion} compares limitations of existing systems with the current one and it points a future work. 
 
 \section{Material and Methods}
 \label{materials_and_methods}
+
 
 \subsection{DataJoint}
 \label{DataJoint}
